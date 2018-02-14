@@ -64,6 +64,14 @@ class SegmentAdminForm(WagtailAdminModelForm):
         if cleaned_data.get('type') == Segment.TYPE_STATIC and not cleaned_data.get('count') and not consistent:
             self.add_error('count', _('Static segments with non-static compatible rules must include a count.'))
 
+        matched_users = self.count_matching_users(rules, self.instance.match_any)
+        if cleaned_data.get('type') == Segment.TYPE_STATIC and cleaned_data.get('count') > matched_users:
+            self.add_error(
+                'count', _(
+                    'Count cannot be bigger that the number of matching users. Number of users matching static rules: {matched_users}'
+                    ).format(matched_users=matched_users)
+                )
+
         if self.instance.id and self.instance.is_static:
             if self.has_changed():
                 self.add_error_to_fields(self, excluded=['name', 'enabled'])
