@@ -53,6 +53,7 @@ class SegmentAdminForm(WagtailAdminModelForm):
     def clean(self):
         cleaned_data = super(SegmentAdminForm, self).clean()
         Segment = self._meta.model
+        is_new = not self.instance.id
 
         rules = [
             form.instance for formset in self.formsets.values()
@@ -64,13 +65,18 @@ class SegmentAdminForm(WagtailAdminModelForm):
         if cleaned_data.get('type') == Segment.TYPE_STATIC and not cleaned_data.get('count') and not consistent:
             self.add_error('count', _('Static segments with non-static compatible rules must include a count.'))
 
-        matched_users = self.count_matching_users(rules, self.instance.match_any)
-        if cleaned_data.get('type') == Segment.TYPE_STATIC and cleaned_data.get('count') > matched_users:
+        matched_users_count = self.count_matching_users(
+                rules, self.instance.match_any)
+
+        if cleaned_data.get('type') == Segment.TYPE_STATIC and matched_users_count and cleaned_data.get('count') > matched_users_count:
             self.add_error(
                 'count', _(
-                    'Count cannot be bigger that the number of matching users. Number of users matching static rules: {matched_users}'
-                    ).format(matched_users=matched_users)
+                    'Count cannot be bigger that the number of matching users. Number of users matching static rules: {matched_users_count}'
+                    ).format(matched_users_count=matched_users_count)
                 )
+        if is_new:
+            self.instance.matched_users_count = matched_users_count
+            self.instance.matched_count_updated_at = datetime.now()
 
         if self.instance.id and self.instance.is_static:
             if self.has_changed():
@@ -94,16 +100,6 @@ class SegmentAdminForm(WagtailAdminModelForm):
 
         if not self.instance.is_static:
             self.instance.count = 0
-
-        if is_new:
-            rules = [
-                form.instance for formset in self.formsets.values()
-                for form in formset
-                if form not in formset.deleted_forms
-            ]
-            self.instance.matched_users_count = self.count_matching_users(
-                rules, self.instance.match_any)
-            self.instance.matched_count_updated_at = datetime.now()
 
         instance = super(SegmentAdminForm, self).save(*args, **kwargs)
 

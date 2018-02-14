@@ -488,6 +488,27 @@ def test_matched_user_count_added_to_segment_at_creation(site, client, mocker, d
 
 
 @pytest.mark.django_db
+def test_static_segment_count_bigger_than_matched_user_count(site, client, mocker, django_user_model):
+    class TestStaticRule(AbstractBaseRule):
+        static = True
+
+        class Meta:
+            app_label = 'wagtail_personalisation'
+
+        def test_user(self, request, user):
+            return True
+
+    django_user_model.objects.create(username='first')
+
+    segment = SegmentFactory.build(type=Segment.TYPE_STATIC, count=2)
+    rule = TestStaticRule()
+    form = form_with_data(segment, rule)
+
+    assert not form.is_valid()
+    assert form.errors
+
+
+@pytest.mark.django_db
 def test_count_users_matching_static_rules(site, client, django_user_model):
     class TestStaticRule(AbstractBaseRule):
         static = True
