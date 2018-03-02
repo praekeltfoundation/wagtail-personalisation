@@ -25,6 +25,15 @@ new segment:
     When persistence is enabled, your segment will stick to the visitor once
     applied, even if the rules no longer match on the next visit.
 
+4. (Optional) Choose whether the segment is static or dynamic.
+
+    Static segments will store which visitors have matched them. Dynamic
+    segments will not keep track of which visitors have matched them.
+
+    4.2 (Static segments) Set a count for a static segment.
+        Static segments will stop testing visitors against their rules when
+        ```count`` users have been added to the segment.
+
 4. Define your segment rules.
 
     Wagxperience comes with a basic set of :doc:`default_rules` that allow

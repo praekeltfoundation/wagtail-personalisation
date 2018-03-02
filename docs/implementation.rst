@@ -84,4 +84,17 @@ Below is the "Time rule" model included with the module, which offers more compl
         def __str__(self):
             return 'Time Rule'
 
+
+Static Rules
+------------
+
+Rules can be flagged as ``static`` this means that they do not rely on an
+active session and can be tested without one. Therefore, Static rules require
+their ``test_user`` function to accept an additional optional argument ``user``
+against which the rule can be tested.
+
+Static rules also require two additional methods ``get_column_header`` and
+``get_user_info_string``. These are used to retrieve info to be displayed on
+the admin indicating how users match the rule.
+
 Continue reading: :doc:`usage_guide`
