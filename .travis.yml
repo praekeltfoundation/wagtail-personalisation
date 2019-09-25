@@ -8,9 +8,6 @@ matrix:
       env: lint
 
     - python: 3.6
-      env: TOXENV=py36-django111-wagtail22
-
-    - python: 3.6
       env: TOXENV=py36-django225-wagtail26
 
 install:
