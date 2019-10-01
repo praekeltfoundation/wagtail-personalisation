@@ -1,3 +1,7 @@
+2.0.0
+==================
+- Add Django 2.2 support
+
 1.0.4
 ==================
 - Add custom javascript to segment forms
