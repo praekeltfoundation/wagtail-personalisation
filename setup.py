@@ -1,4 +1,5 @@
 import re
+import os
 from setuptools import find_packages, setup
 
 install_requires = [
@@ -30,9 +31,13 @@ with open('README.rst') as fh:
     long_description = re.sub(
         '^.. start-no-pypi.*^.. end-no-pypi', '', fh.read(), flags=re.M | re.S)
 
+here = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(here, 'VERSION')) as f:
+    version = f.read().strip()
+
 setup(
     name='wagtail-personalisation-molo',
-    version='1.0.4',
+    version=version,
     description='A forked version of Wagtail add-on for showing personalized content',
     author='Praekelt.org',
     author_email='dev@praekeltfoundation.org',
