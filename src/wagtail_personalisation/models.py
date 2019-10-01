@@ -223,10 +223,10 @@ class PersonalisablePageMetadata(ClusterableModel):
     )
 
     variant = models.OneToOneField(
-        Page, related_name='_personalisable_page_metadata', on_delete=models.CASCADE)
+        Page, related_name='_personalisable_page_metadata')
 
     segment = models.ForeignKey(
-        Segment, related_name='page_metadata', null=True, blank=True, on_delete=models.CASCADE)
+        Segment, related_name='page_metadata', null=True, blank=True)
 
     @cached_property
     def has_variants(self):
