@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 import csv
 
 from django import forms
-from django.urls import reverse
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _

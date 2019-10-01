@@ -2,10 +2,10 @@ from __future__ import absolute_import, unicode_literals
 
 import logging
 
-from django.urls import reverse
-from django.conf.urls import include, re_path
-from django.utils.safestring import mark_safe
+from django.conf.urls import include, url
+from django.core.urlresolvers import reverse
 from django.template.defaultfilters import pluralize
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from wagtail.admin.site_summary import PagesSummaryItem, SummaryItem
 from wagtail.admin.widgets import Button, ButtonWithDropdownFromHook
@@ -22,8 +22,9 @@ logger = logging.getLogger(__name__)
 def register_admin_urls():
     """Adds the administration urls for the personalisation apps."""
     return [
-        re_path(r'^personalisation/', include(
-            (admin_urls, 'wagtail_personalisation'),
+        url(r'^personalisation/', include(
+            admin_urls,
+            app_name='wagtail_personalisation',
             namespace='wagtail_personalisation')),
     ]
 
