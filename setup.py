@@ -2,7 +2,7 @@ import re
 from setuptools import find_packages, setup
 
 install_requires = [
-    'wagtail>=2.2,<2.3',
+    'wagtail~=2.6.2',
     'user-agents>=1.0.1',
     'wagtailfontawesome>=1.1.3',
 ]
@@ -63,6 +63,7 @@ setup(
         'Framework :: Django :: 1.9',
         'Framework :: Django :: 1.10',
         'Framework :: Django :: 1.11',
+        'Framework :: Django :: 2.2',
         'Topic :: Internet :: WWW/HTTP :: Site Management',
     ],
 )
