@@ -1,12 +1,4 @@
-2.0.5
-==================
-- Fix model errors
-
-2.0.4
-==================
-- Fix deprecation errors
-
-2.0.3
+2.0.6
 ==================
 - Add Django 2.2 support
 
