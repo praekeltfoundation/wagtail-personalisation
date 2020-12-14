@@ -9,6 +9,7 @@ install_requires = [
 
 tests_require = [
     'factory_boy==2.8.1',
+    'isort==4.3.21',
     'flake8',
     'flake8-blind-except',
     'flake8-debugger',
