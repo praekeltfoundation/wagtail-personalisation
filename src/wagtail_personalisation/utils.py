@@ -105,10 +105,10 @@ def exclude_variants(pages):
     """
     for page in pages:
         if hasattr(page, 'personalisation_metadata') is not False and \
-           page.personalisation_metadata is not None and \
-           page.personalisation_metadata.is_canonical is not True:
-                if (type(pages) == list):
-                    pages.remove(page)
-                else:
-                    pages = pages.exclude(pk=page.pk)
+                page.personalisation_metadata is not None and \
+                page.personalisation_metadata.is_canonical is not True:
+            if (type(pages) == list):
+                pages.remove(page)
+            else:
+                pages = pages.exclude(pk=page.pk)
     return pages
