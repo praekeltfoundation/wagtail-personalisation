@@ -10,7 +10,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.sessions.models import Session
 from django.db import models
 from django.template.defaultfilters import slugify
-from django.utils.encoding import force_text, python_2_unicode_compatible
+from six import python_2_unicode_compatible
+from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 from django.test.client import RequestFactory
 from modelcluster.fields import ParentalKey

@@ -11,6 +11,7 @@ tests_require = [
     'factory_boy==2.8.1',
     'isort==4.3.21',
     'flake8',
+    'six',
     'flake8-blind-except',
     'flake8-debugger',
     'flake8-imports',
@@ -34,7 +35,7 @@ with open('README.rst') as fh:
 
 setup(
     name='wagtail-personalisation-molo',
-    version='2.0.10',
+    version='3.0.1',
     description='A forked version of Wagtail add-on for showing personalized content',
     author='Praekelt.org',
     author_email='dev@praekeltfoundation.org',

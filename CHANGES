@@ -1,3 +1,7 @@
+3.1.0
+==================
+- Add Django 3.1+ support
+
 2.0.10
 ==================
 - Add Django 2.2 support
