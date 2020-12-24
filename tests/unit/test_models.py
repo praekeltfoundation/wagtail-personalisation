@@ -31,5 +31,5 @@ def test_metadata_page_has_variants(segmented_page):
 @pytest.mark.django_db
 def test_segment_edit_view(site, client, django_user_model):
     test_segment = Segment()
-    new_panel = test_segment.panels[1].children[0].bind_to_model(Segment)
+    new_panel = test_segment.panels[1].children[0].bind_to(model=Segment)
     assert new_panel.related.name == "wagtail_personalisation_timerules"
